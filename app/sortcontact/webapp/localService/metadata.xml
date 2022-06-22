@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="MyService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="MyEntity" EntityType="MyService.MyEntity">
+                    <NavigationPropertyBinding Path="SecondEntity" Target="MySecondEntity"/>
+                </EntitySet>
+                <EntitySet Name="MySecondEntity" EntityType="MyService.MySecondEntity"/>
+            </EntityContainer>
+            <EntityType Name="MyEntity">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="SecondEntityCode" Type="Edm.String"/>
+                <NavigationProperty Name="SecondEntity" Type="MyService.MySecondEntity">
+                    <ReferentialConstraint Property="SecondEntityCode" ReferencedProperty="Code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MySecondEntity">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false"/>
+                <Property Name="Value" Type="Edm.String"/>
+            </EntityType>
+            <Annotations Target="MyService.MySecondEntity/Code">
+                <Annotation Term="Common.Text" Path="Value"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -19,7 +19,7 @@ annotate service.MyEntity with @(
         {
             $Type : 'UI.DataFieldForAnnotation',
             Label  : 'Second Entity Contact',
-            Target : 'SecondEntity/@Communication.Contact' // TODO: The target path is not being picked up
+            Target : 'SecondEntity/@Communication.Contact'
         },
     ]
 );
